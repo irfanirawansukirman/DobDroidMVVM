@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //core libs
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    api "androidx.lifecycle:lifecycle-extensions:2.0.0"
+
+    //eventbus
+    api 'org.greenrobot:eventbus:3.1.1'
+
+    //utils
+    api 'com.github.andob:DobDroidMiscUtils:v1.0.3'
+
+    //keyboard events
+    api 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.2.0'
+
+    api 'com.github.andob:LocaleChanger:0.9.3'
+}

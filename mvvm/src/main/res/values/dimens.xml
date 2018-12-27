@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="double_margin">32dp</dimen>
+    <dimen name="three_quarters_double_margin">24dp</dimen>
+    <dimen name="main_margin">16dp</dimen>
+    <dimen name="half_margin">8dp</dimen>
+    <dimen name="quarter_margin">4dp</dimen>
+    <dimen name="eight_margin">2dp</dimen>
+</resources>

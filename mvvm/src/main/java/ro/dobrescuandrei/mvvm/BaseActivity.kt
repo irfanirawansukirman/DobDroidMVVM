@@ -16,6 +16,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.franmontiel.localechanger.LocaleChanger
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
 import ro.dobrescuandrei.mvvm.utils.BackgroundEventBus
@@ -28,7 +29,8 @@ import ro.dobrescuandrei.utils.onOptionsItemSelected
 
 abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 {
-    private lateinit var toolbar : Toolbar
+    lateinit var toolbar : Toolbar
+    var searchView : MaterialSearchView? = null
     private var unregistrar : Unregistrar? = null
     private var loadingDialog : AlertDialog? = null
 
@@ -52,6 +54,8 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         setContentView(layout())
 
         toolbar=findViewById(R.id.toolbar)
+        searchView=findViewById(R.id.searchView)
+
         setSupportActionBar(toolbar)
 
         viewModel().run {
@@ -72,11 +76,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         {
             BackgroundEventBus.register(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
 
         unregistrar=KeyboardVisibilityEvent.registerEventListener(this) { isOpen ->
             if (isOpen)
@@ -105,6 +105,8 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 
     open fun onKeyboardClosed()
     {
+        searchView?.closeSearch()
+
         ForegroundEventBus.post(OnKeyboardClosedEvent())
     }
 
@@ -128,7 +130,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 
     fun hideLoadingDialog()
     {
-        loadingDialog?.hide()
+        loadingDialog?.dismiss()
     }
 
     fun showToast(error : Int)
@@ -144,11 +146,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         {
             ForegroundEventBus.register(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
     }
 
     override fun onPause()
@@ -159,11 +157,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         {
             ForegroundEventBus.unregister(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
     }
 
     override fun onDestroy()
@@ -172,14 +166,12 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         {
             BackgroundEventBus.unregister(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
 
         unregistrar?.unregister()
         unregistrar=null
+
+        hideLoadingDialog()
         loadingDialog=null
 
         super.onDestroy()
@@ -197,6 +189,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
         try
         {
             toolbar.onCreateOptionsMenu(menuInflater, menu)
+            searchView?.setMenuItem(menu?.findItem(R.id.search))
         }
         catch (ex : Exception) {}
 

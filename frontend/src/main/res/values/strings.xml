@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">DemoNewLibs</string>
     <string name="login">Login</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="no_restaurants">No restaurants</string>
+    <string name="search">Search</string>
+    <string name="filter_by_rating">Filter by rating</string>
+    <string name="filter_by_type">Filter by type</string>
+    <string name="choose_rating">Choose rating</string>
+    <string name="choose_type">Choose type</string>
+    <string name="fast_food">Fast food</string>
+    <string name="normal">Normal</string>
 </resources>

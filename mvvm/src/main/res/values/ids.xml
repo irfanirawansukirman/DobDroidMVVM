@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="toolbar" type="id"/>
+    <item name="recyclerView" type="id"/>
+    <item name="emptyView" type="id"/>
+    <item name="addButton" type="id"/>
+    <item name="searchView" type="id"/>
+    <item name="search" type="id"/>
 </resources>

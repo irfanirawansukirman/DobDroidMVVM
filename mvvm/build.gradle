@@ -2,6 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.jitpack'
+version 'v1.0.0'
 
 android {
     compileSdkVersion 28
@@ -29,10 +33,17 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'
 
     //utils
-    api 'com.github.andob:DobDroidMiscUtils:v1.0.3'
+    api 'com.github.andob:DobDroidMiscUtils:v1.0.4'
 
     //keyboard events
     api 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.2.0'
 
+    //locale changer
     api 'com.github.andob:LocaleChanger:0.9.3'
+
+    //declarative adapter
+    api 'com.github.andob:DeclarativeAdapter-kt:1.0.0'
+
+    //material search view
+    api 'com.github.andob:MaterialSearchView:1.4.5'
 }

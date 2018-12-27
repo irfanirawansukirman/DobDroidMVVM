@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity<LoginViewModel>()
     @Subscribe
     fun onLoggedIn(event : OnLoggedInEvent)
     {
-        ActivityRouter.startMainActivity(from = this)
+        ActivityRouter.startRestaurantListActivity(from = this)
         finish()
     }
 }

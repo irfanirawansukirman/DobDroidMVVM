@@ -49,11 +49,7 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         {
             BackgroundEventBus.register(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
 
         return view
     }
@@ -66,11 +62,7 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         {
             ForegroundEventBus.register(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
     }
 
     override fun onPause()
@@ -81,11 +73,7 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         {
             ForegroundEventBus.unregister(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
     }
 
     override fun onDestroy()
@@ -94,11 +82,7 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         {
             BackgroundEventBus.unregister(this)
         }
-        catch (ex : Exception)
-        {
-            if (BuildConfig.DEBUG)
-                ex.printStackTrace()
-        }
+        catch (ex : Exception) {}
 
         super.onDestroy()
     }

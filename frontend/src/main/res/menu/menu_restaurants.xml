@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/filterByType"
+        android:title="@string/filter_by_type"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_filter_white_24dp"/>
+
+    <item
+        android:id="@+id/filterByRating"
+        android:title="@string/filter_by_rating"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_octagram_outline_white_24dp"/>
+
+    <item
+        android:id="@+id/search"
+        android:orderInCategory="-80"
+        android:title="@string/search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_magnify_white_24dp"/>
+
+</menu>

@@ -10,4 +10,16 @@
     <string name="choose_type">Choose type</string>
     <string name="fast_food">Fast food</string>
     <string name="normal">Normal</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="save">Save</string>
+    <string name="type">Type</string>
+    <string name="rating">Rating</string>
+    <string name="name">Name</string>
+    <string name="type_name">Type name</string>
+    <string name="restaurant_added">Restaurant added!</string>
+    <string name="restaurant_edited">Restaurant edited!</string>
+    <string name="add_restaurant">Add restaurant</string>
+    <string name="edit_restaurant">Edit restaurant</string>
+    <string name="second_page">Second page</string>
+    <string name="first_page">First page</string>
 </resources>

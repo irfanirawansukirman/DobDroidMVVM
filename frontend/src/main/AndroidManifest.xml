@@ -13,7 +13,7 @@
             tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".user.login.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="${configChanges}">
@@ -24,7 +24,19 @@
         </activity>
 
         <activity
-            android:name=".restaurant.list.RestaurantListActivity"
+            android:name=".activity.RestaurantListActivity"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="${configChanges}"/>
+
+        <activity
+            android:name=".activity.RestaurantEditorActivity"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="${configChanges}"/>
+
+        <activity
+            android:name=".activity.RestaurantDetailsActivity"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="${configChanges}"/>

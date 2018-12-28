@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ro.dobrescuandrei.mvvm.utils.BackgroundEventBus
 import ro.dobrescuandrei.mvvm.utils.ForegroundEventBus
+import ro.dobrescuandrei.mvvm.utils.NO_VALUE_INT
 
 abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
 {
@@ -36,7 +37,8 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
             loading.value=false
 
             error.observe(this@BaseFragment) { error ->
-                if (error!=0) (context as BaseActivity<*>).showToast(error)
+                if (error!=NO_VALUE_INT)
+                    (context as BaseActivity<*>).showToast(error)
             }
 
             loading.observe(this@BaseFragment) { loading ->

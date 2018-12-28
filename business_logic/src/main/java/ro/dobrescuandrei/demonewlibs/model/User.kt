@@ -1,7 +1,9 @@
 package ro.dobrescuandrei.demonewlibs.model
 
+import ro.dobrescuandrei.mvvm.utils.Identifiable
+
 class User
 (
-    val id : ID,
+    id : ID,
     val name : String
-)
+) : Identifiable<ID>(id)

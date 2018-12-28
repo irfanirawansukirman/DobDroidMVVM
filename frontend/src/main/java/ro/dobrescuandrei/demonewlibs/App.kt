@@ -4,8 +4,6 @@ import android.app.Application
 import android.os.Handler
 import com.chibatching.kotpref.Kotpref
 import com.franmontiel.localechanger.LocaleChanger
-import ro.dobrescuandrei.demonewlibs.utils.constants.LANGUAGE_ENGLISH
-import ro.dobrescuandrei.demonewlibs.utils.constants.LANGUAGE_ROMANIAN
 import ro.dobrescuandrei.utils.Run
 import java.util.*
 

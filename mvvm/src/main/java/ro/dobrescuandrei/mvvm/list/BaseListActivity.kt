@@ -9,14 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import ro.andreidobrescu.declarativeadapterkt.BaseDeclarativeAdapter
+import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
 import ro.dobrescuandrei.mvvm.BaseActivity
 import ro.dobrescuandrei.mvvm.R
+import ro.dobrescuandrei.mvvm.list.item_decoration.FABDividerItemDecoration
+import ro.dobrescuandrei.mvvm.list.item_decoration.StickyHeadersItemDecoration
 
 abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : BaseDeclarativeAdapter> : BaseActivity<VIEW_MODEL>()
 {
     lateinit var recyclerView : RecyclerViewMod
     lateinit var emptyView : TextView
     var addButton : FloatingActionButton? = null
+    var stickyHeadersItemDecoration : StickyHeadersItemDecoration? = null
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -55,6 +59,14 @@ abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
         if (decoration!=null)
         {
             recyclerView.addItemDecoration(decoration)
+        }
+
+        if (hasStickyHeaders())
+        {
+            stickyHeadersItemDecoration=StickyHeadersItemDecoration(
+                /*headerViewInstantiator*/  { provideStickyHeaderView(it) },
+                /*headerModelClassProvider*/{ provideStickyHeaderModelClass(it) })
+            recyclerView.addItemDecoration(stickyHeadersItemDecoration!!)
         }
 
         if (shouldLoadMoreOnScroll())
@@ -108,6 +120,9 @@ abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     open fun provideItemDecoration() : RecyclerView.ItemDecoration? = FABDividerItemDecoration(this)
     open fun shouldLoadMoreOnScroll() : Boolean = true
     open fun provideEmptyViewDescription() : String = getString(R.string.no_items)
+    open fun hasStickyHeaders() : Boolean = false
+    open fun provideStickyHeaderModelClass(position : Int) : Class<*>? = null
+    open fun provideStickyHeaderView(position : Int) : HeaderView<*>? = null
 
     override fun onBackPressed()
     {
@@ -127,6 +142,14 @@ abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
         {
             super.onBackPressed()
         }
+    }
+
+    override fun onDestroy()
+    {
+        stickyHeadersItemDecoration?.onDestroy()
+        stickyHeadersItemDecoration=null
+
+        super.onDestroy()
     }
 
     override fun onKeyboardOpened()

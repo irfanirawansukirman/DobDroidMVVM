@@ -1,0 +1,4 @@
+package ro.dobrescuandrei.demonewlibs.model
+
+class FirstPageHeader
+class SecondPageHeader

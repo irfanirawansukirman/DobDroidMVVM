@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ro.dobrescuandrei.demonewlibs_bll"/>
+<manifest package="ro.dobrescuandrei.demonewlibs_bll" />

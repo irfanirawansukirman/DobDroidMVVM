@@ -19,10 +19,7 @@ import com.franmontiel.localechanger.LocaleChanger
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
-import ro.dobrescuandrei.mvvm.utils.BackgroundEventBus
-import ro.dobrescuandrei.mvvm.utils.ForegroundEventBus
-import ro.dobrescuandrei.mvvm.utils.OnKeyboardClosedEvent
-import ro.dobrescuandrei.mvvm.utils.OnKeyboardOpenedEvent
+import ro.dobrescuandrei.mvvm.utils.*
 import ro.dobrescuandrei.utils.Keyboard
 import ro.dobrescuandrei.utils.onCreateOptionsMenu
 import ro.dobrescuandrei.utils.onOptionsItemSelected
@@ -63,7 +60,8 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
             loading.value=false
 
             error.observe(this@BaseActivity) { error ->
-                if (error!=0) showToast(error)
+                if (error!=NO_VALUE_INT)
+                    showToast(error)
             }
 
             loading.observe(this@BaseActivity) { loading ->

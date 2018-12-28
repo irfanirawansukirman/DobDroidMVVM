@@ -1,0 +1,3 @@
+package ro.dobrescuandrei.demonewlibs
+
+class RefreshRestaurantListCommand

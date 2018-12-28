@@ -1,3 +1,5 @@
+package ro.dobrescuandrei.mvvm.list
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.greenrobot.eventbus.Subscribe
 import ro.andreidobrescu.declarativeadapterkt.BaseDeclarativeAdapter
+import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
 import ro.dobrescuandrei.mvvm.BaseFragment
 import ro.dobrescuandrei.mvvm.R
-import ro.dobrescuandrei.mvvm.list.BaseListViewModel
-import ro.dobrescuandrei.mvvm.list.FABDividerItemDecoration
-import ro.dobrescuandrei.mvvm.list.RecyclerViewMod
+import ro.dobrescuandrei.mvvm.list.item_decoration.FABDividerItemDecoration
+import ro.dobrescuandrei.mvvm.list.item_decoration.StickyHeadersItemDecoration
 import ro.dobrescuandrei.mvvm.utils.OnKeyboardClosedEvent
 import ro.dobrescuandrei.mvvm.utils.OnKeyboardOpenedEvent
 
@@ -19,6 +21,7 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
 {
     lateinit var recyclerView : RecyclerViewMod
     lateinit var emptyView : TextView
+    var stickyHeadersItemDecoration : StickyHeadersItemDecoration? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -40,6 +43,14 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             recyclerView.addItemDecoration(decoration)
         }
 
+        if (hasStickyHeaders())
+        {
+            stickyHeadersItemDecoration=StickyHeadersItemDecoration(
+                /*headerViewInstantiator*/  { provideStickyHeaderView(it) },
+                /*headerModelClassProvider*/{ provideStickyHeaderModelClass(it) })
+            recyclerView.addItemDecoration(stickyHeadersItemDecoration!!)
+        }
+
         if (shouldLoadMoreOnScroll())
         {
             recyclerView.loadMoreDataAction={
@@ -47,7 +58,7 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             }
         }
 
-        emptyView.text = provideEmptyViewDescription()
+        emptyView.text = provideEmptyViewText()
 
         viewModel().run {
             firstPageItems.value=null
@@ -86,7 +97,18 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     open fun provideLayoutManager() : RecyclerView.LayoutManager = LinearLayoutManager(context)
     open fun provideItemDecoration() : RecyclerView.ItemDecoration? = FABDividerItemDecoration(context)
     open fun shouldLoadMoreOnScroll() : Boolean = true
-    open fun provideEmptyViewDescription(): String = getString(R.string.no_items)
+    open fun provideEmptyViewText(): String = getString(R.string.no_items)
+    open fun hasStickyHeaders() : Boolean = false
+    open fun provideStickyHeaderModelClass(position : Int) : Class<*>? = null
+    open fun provideStickyHeaderView(position : Int) : HeaderView<*>? = null
+
+    override fun onDestroy()
+    {
+        stickyHeadersItemDecoration?.onDestroy()
+        stickyHeadersItemDecoration=null
+
+        super.onDestroy()
+    }
 
     @Subscribe
     fun onKeyboardOpened(event : OnKeyboardOpenedEvent)

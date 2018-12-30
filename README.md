@@ -13,7 +13,7 @@ allprojects {
 ```
 ```
 dependencies {
-    implementation('com.github.andob:DobDroidMVVM:1.0.0')
+    api 'com.github.andob:DobDroidMVVM:1.0.0'
 }
 ```
 

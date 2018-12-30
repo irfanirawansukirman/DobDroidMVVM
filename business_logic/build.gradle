@@ -21,7 +21,7 @@ android {
 
 dependencies {
     //architecture
-    api project(":mvvm")
+    api 'com.github.andob:DobDroidMVVM:1.0.0'
 
     //preferences
     api 'com.chibatching.kotpref:kotpref:2.6.0'

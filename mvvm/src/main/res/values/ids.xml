@@ -7,4 +7,5 @@
     <item name="searchView" type="id"/>
     <item name="search" type="id"/>
     <item name="saveButton" type="id"/>
+    <item name="fragmentContainer" type="id"/>
 </resources>

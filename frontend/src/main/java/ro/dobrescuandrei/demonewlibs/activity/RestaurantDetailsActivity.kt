@@ -5,7 +5,6 @@ import ro.andreidobrescu.declarativeadapterkt.DeclarativeAdapter
 import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
 import ro.dobrescuandrei.demonewlibs.R
 import ro.dobrescuandrei.demonewlibs.model.FirstPageHeader
-import ro.dobrescuandrei.demonewlibs.model.ID
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
 import ro.dobrescuandrei.demonewlibs.model.SecondPageHeader
 import ro.dobrescuandrei.demonewlibs.view.RestaurantCellView
@@ -13,7 +12,6 @@ import ro.dobrescuandrei.demonewlibs.view.sticky_headers.FirstPageHeaderView
 import ro.dobrescuandrei.demonewlibs.view.sticky_headers.SecondPageHeaderView
 import ro.dobrescuandrei.demonewlibs.viewmodel.RestaurantDetailsViewModel
 import ro.dobrescuandrei.mvvm.details.BaseDetailsActivity
-import ro.dobrescuandrei.mvvm.list.BaseListActivity
 import ro.dobrescuandrei.utils.setupBackIcon
 
 class RestaurantDetailsActivity : BaseDetailsActivity<Restaurant, RestaurantDetailsViewModel, DeclarativeAdapter>()
@@ -25,8 +23,10 @@ class RestaurantDetailsActivity : BaseDetailsActivity<Restaurant, RestaurantDeta
     {
         super.onCreate(savedInstanceState)
 
-        toolbar.setupBackIcon()
-        toolbar.setTitle(R.string.restaurant)
+        toolbar?.let { toolbar ->
+            toolbar.setupBackIcon()
+            toolbar.setTitle(R.string.restaurant)
+        }
     }
 
     override fun provideAdapter() : DeclarativeAdapter

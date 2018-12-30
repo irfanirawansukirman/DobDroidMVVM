@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:titleTextColor="@color/white"
+            app:title="@string/restaurants"
+            android:id="@+id/toolbar"/>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchView"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ro.dobrescuandrei.mvvm.list.RecyclerViewMod
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emptyView"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/main_margin"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/main_margin"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/ic_plus_white_24dp"
+            android:id="@+id/addButton"
+            app:fabSize="normal"/>
+
+    </FrameLayout>
+
+</LinearLayout>

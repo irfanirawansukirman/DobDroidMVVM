@@ -12,22 +12,17 @@ import ro.dobrescuandrei.utils.Run
 
 class LoginViewModel : BaseViewModel()
 {
-    val username : MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val password : MutableLiveData<String> by lazy { MutableLiveData<String>() }
-
-    fun onLoginClicked()
+    fun onLoginClicked(username : String, password : String)
     {
         when
         {
-            TextUtils.isEmpty(username.value) -> showError(R.string.please_type_username)
-            TextUtils.isEmpty(password.value) -> showError(R.string.please_type_password)
+            TextUtils.isEmpty(username) -> showError(R.string.please_type_username)
+            TextUtils.isEmpty(password) -> showError(R.string.please_type_password)
             else ->
             {
                 showLoading()
 
-                Run.async(task = { LoginRequest(
-                        username = username.value?:"",
-                        password = password.value?:"").execute() },
+                Run.async(task = { LoginRequest(username, password).execute() },
                     onAny = { hideLoading() },
                     onError = { showError(R.string.invalid_username_or_password) },
                     onSuccess = { user ->

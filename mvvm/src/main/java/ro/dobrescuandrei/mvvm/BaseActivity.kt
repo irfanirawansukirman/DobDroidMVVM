@@ -26,7 +26,7 @@ import ro.dobrescuandrei.utils.onOptionsItemSelected
 
 abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 {
-    lateinit var toolbar : Toolbar
+    var toolbar : Toolbar? = null
     var searchView : MaterialSearchView? = null
     private var unregistrar : Unregistrar? = null
     private var loadingDialog : AlertDialog? = null
@@ -55,18 +55,21 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 
         setSupportActionBar(toolbar)
 
-        viewModel().run {
-            error.value=0
-            loading.value=false
+        if (viewModelClass()!=BaseViewModel::class.java)
+        {
+            viewModel().run {
+                error.value=0
+                loading.value=false
 
-            error.observe(this@BaseActivity) { error ->
-                if (error!=NO_VALUE_INT)
-                    showToast(error)
-            }
+                error.observe(this@BaseActivity) { error ->
+                    if (error!=NO_VALUE_INT)
+                        showToast(error)
+                }
 
-            loading.observe(this@BaseActivity) { loading ->
-                if (loading) showLoadingDialog()
-                else hideLoadingDialog()
+                loading.observe(this@BaseActivity) { loading ->
+                    if (loading) showLoadingDialog()
+                    else hideLoadingDialog()
+                }
             }
         }
 
@@ -186,7 +189,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
     {
         try
         {
-            toolbar.onCreateOptionsMenu(menuInflater, menu)
+            toolbar?.onCreateOptionsMenu(menuInflater, menu)
             searchView?.setMenuItem(menu?.findItem(R.id.search))
         }
         catch (ex : Exception) {}
@@ -196,7 +199,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean
     {
-        toolbar.onOptionsItemSelected(item)
+        toolbar?.onOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
     }
 

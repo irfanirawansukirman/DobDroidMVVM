@@ -2,12 +2,9 @@ package ro.dobrescuandrei.demonewlibs.router
 
 import android.content.Context
 import android.content.Intent
-import ro.dobrescuandrei.demonewlibs.activity.LoginActivity
-import ro.dobrescuandrei.demonewlibs.activity.RestaurantDetailsActivity
-import ro.dobrescuandrei.demonewlibs.activity.RestaurantEditorActivity
-import ro.dobrescuandrei.demonewlibs.activity.RestaurantListActivity
-import ro.dobrescuandrei.demonewlibs.model.ID
+import ro.dobrescuandrei.demonewlibs.activity.*
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
+import ro.dobrescuandrei.mvvm.utils.setChooseMode
 import ro.dobrescuandrei.mvvm.utils.setModel
 
 object ActivityRouter
@@ -21,6 +18,20 @@ object ActivityRouter
     fun startRestaurantListActivity(from : Context)
     {
         val i=Intent(from, RestaurantListActivity::class.java)
+        from.startActivity(i)
+    }
+
+    fun startChooseRestaurantActivity(from : Context)
+    {
+        val i=Intent(from, RestaurantListActivity::class.java)
+        i.setChooseMode()
+        from.startActivity(i)
+    }
+
+    fun startChoosePagedRestaurantActivity(from : Context)
+    {
+        val i=Intent(from, RestaurantPagedListActivity::class.java)
+        i.setChooseMode()
         from.startActivity(i)
     }
 

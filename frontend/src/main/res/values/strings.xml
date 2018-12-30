@@ -22,4 +22,8 @@
     <string name="edit_restaurant">Edit restaurant</string>
     <string name="second_page">Second page</string>
     <string name="first_page">First page</string>
+    <string name="simple_choose_demo">Simple choose demo</string>
+    <string name="paged_choose_demo">Paged choose demo</string>
+    <string name="restaurants1">Restaurants1</string>
+    <string name="restaurants2">Restaurants2</string>
 </resources>

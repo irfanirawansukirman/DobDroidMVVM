@@ -1,12 +1,15 @@
 package ro.dobrescuandrei.mvvm.list
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import org.greenrobot.eventbus.Subscribe
 import ro.andreidobrescu.declarativeadapterkt.BaseDeclarativeAdapter
 import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
@@ -21,6 +24,7 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
 {
     lateinit var recyclerView : RecyclerViewMod
     lateinit var emptyView : TextView
+    var addButton : FloatingActionButton? = null
     var stickyHeadersItemDecoration : StickyHeadersItemDecoration? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -29,8 +33,27 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
 
         recyclerView=view.findViewById(R.id.recyclerView)
         emptyView=view.findViewById(R.id.emptyView)
+        addButton=view.findViewById(R.id.addButton)
 
-        view.findViewById<View>(R.id.addButton)?.setOnClickListener { onAddButtonClicked() }
+        addButton?.setOnClickListener { onAddButtonClicked() }
+
+        searchView?.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener
+        {
+            override fun onQueryTextSubmit(query: String?): Boolean
+            {
+                if (!TextUtils.isEmpty(query))
+                {
+                    viewModel().search=query!!
+                    viewModel().loadData()
+
+                    searchView?.closeSearch()
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean = true
+        })
 
         recyclerView.layoutManager=provideLayoutManager()
 
@@ -66,12 +89,18 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             isEmpty.value=false
 
             firstPageItems.observe(this@BaseListFragment) { items ->
-                recyclerView.adapter?.setItems(items)
-                recyclerView.scrollToPosition(0)
+                if (items!=null)
+                {
+                    recyclerView.adapter?.setItems(items)
+                    recyclerView.scrollToPosition(0)
+                }
             }
 
             nextPageItems.observe(this@BaseListFragment) { items ->
-                recyclerView.adapter?.addItems(items)
+                if (items!=null)
+                {
+                    recyclerView.adapter?.addItems(items)
+                }
             }
 
             isEmpty.observe(this@BaseListFragment) { isEmpty ->
@@ -102,6 +131,25 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     open fun provideStickyHeaderModelClass(position : Int) : Class<*>? = null
     open fun provideStickyHeaderView(position : Int) : HeaderView<*>? = null
 
+    override fun shouldFinishActivityOnBackPressed() : Boolean
+    {
+        try
+        {
+            if (viewModel().searchMode())
+            {
+                viewModel().search=null
+                viewModel().loadData()
+                return false
+            }
+
+            return true
+        }
+        catch (e : Exception)
+        {
+            return true
+        }
+    }
+
     override fun onDestroy()
     {
         stickyHeadersItemDecoration?.onDestroy()
@@ -111,17 +159,15 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     }
 
     @Subscribe
-    fun onKeyboardOpened(event : OnKeyboardOpenedEvent)
+    override fun onKeyboardOpened(event : OnKeyboardOpenedEvent)
     {
-        try { view?.findViewById<View>(R.id.addButton)?.visibility=View.GONE }
-        catch (e : Exception) {}
+        addButton?.visibility=View.GONE
     }
 
     @Subscribe
-    fun onKeyboardClosed(event : OnKeyboardClosedEvent)
+    override fun onKeyboardClosed(event : OnKeyboardClosedEvent)
     {
-        try { view?.findViewById<View>(R.id.addButton)?.visibility=View.VISIBLE }
-        catch (e : Exception) {}
+        addButton?.visibility=View.VISIBLE
     }
 
     open fun onAddButtonClicked()

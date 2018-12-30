@@ -76,7 +76,7 @@ abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             }
         }
 
-        emptyView.text = provideEmptyViewDescription()
+        emptyView.text = provideEmptyViewText()
 
         viewModel().run {
             firstPageItems.value=null
@@ -119,7 +119,7 @@ abstract class BaseListActivity<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     open fun provideLayoutManager() : RecyclerView.LayoutManager = LinearLayoutManager(this)
     open fun provideItemDecoration() : RecyclerView.ItemDecoration? = FABDividerItemDecoration(this)
     open fun shouldLoadMoreOnScroll() : Boolean = true
-    open fun provideEmptyViewDescription() : String = getString(R.string.no_items)
+    open fun provideEmptyViewText() : String = getString(R.string.no_items)
     open fun hasStickyHeaders() : Boolean = false
     open fun provideStickyHeaderModelClass(position : Int) : Class<*>? = null
     open fun provideStickyHeaderView(position : Int) : HeaderView<*>? = null

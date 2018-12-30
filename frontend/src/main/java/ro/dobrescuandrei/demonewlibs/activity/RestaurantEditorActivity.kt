@@ -6,9 +6,12 @@ import android.view.View
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_restaurant_editor.*
 import org.greenrobot.eventbus.Subscribe
+import ro.dobrescuandrei.demonewlibs.OnRestaurantAddedEvent
+import ro.dobrescuandrei.demonewlibs.OnRestaurantChoosedEvent
 import ro.dobrescuandrei.demonewlibs.R
 import ro.dobrescuandrei.demonewlibs.RefreshRestaurantListCommand
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
+import ro.dobrescuandrei.demonewlibs.router.ActivityRouter
 import ro.dobrescuandrei.demonewlibs.router.ShowDialog
 import ro.dobrescuandrei.demonewlibs.viewmodel.RestaurantEditorViewModel
 import ro.dobrescuandrei.mvvm.editor.BaseEditorActivity
@@ -27,10 +30,12 @@ class RestaurantEditorActivity : BaseEditorActivity<Restaurant, RestaurantEditor
     {
         super.onCreate(savedInstanceState)
 
-        toolbar.setupBackIcon()
-        toolbar.setTitle(if (viewModel().addMode())
-                R.string.add_restaurant
-            else R.string.edit_restaurant)
+        toolbar?.let { toolbar ->
+            toolbar.setupBackIcon()
+            toolbar.setTitle(if (viewModel().addMode())
+                    R.string.add_restaurant
+                else R.string.edit_restaurant)
+        }
 
         typeButton.setOnClickListener {
             ShowDialog.withList(context = this,
@@ -62,13 +67,15 @@ class RestaurantEditorActivity : BaseEditorActivity<Restaurant, RestaurantEditor
         nameEt.setOnTextChangedListener { name ->
             viewModel().model { it.name=name }
         }
+
+        setupChooserDemo()
     }
 
     override fun show(restaurant : Restaurant)
     {
         viewModel().isValid=true
 
-        if (restaurant.type== NO_VALUE_INT)
+        if (restaurant.type==NO_VALUE_INT)
         {
             typeErrorTv.visibility=View.VISIBLE
             typeTv.visibility=View.GONE
@@ -88,8 +95,8 @@ class RestaurantEditorActivity : BaseEditorActivity<Restaurant, RestaurantEditor
 
         if (TextUtils.isEmpty(restaurant.name))
         {
-            viewModel().isValid=false
             nameTil.error=getString(R.string.type_name)
+            viewModel().isValid=false
         }
         else
         {
@@ -100,6 +107,7 @@ class RestaurantEditorActivity : BaseEditorActivity<Restaurant, RestaurantEditor
     @Subscribe
     override fun onAdded(event : OnEditorModel.AddedEvent<Restaurant>)
     {
+        BackgroundEventBus.post(OnRestaurantAddedEvent(restaurant = event.model))
         showToast(R.string.restaurant_added)
     }
 
@@ -114,5 +122,23 @@ class RestaurantEditorActivity : BaseEditorActivity<Restaurant, RestaurantEditor
     {
         BackgroundEventBus.post(RefreshRestaurantListCommand())
         finish()
+    }
+
+    //chooser demo zone
+    fun setupChooserDemo()
+    {
+        simpleChooseDemo.setOnClickListener {
+            ActivityRouter.startChooseRestaurantActivity(from = it.context)
+        }
+
+        pagedChooseDemo.setOnClickListener {
+            ActivityRouter.startChoosePagedRestaurantActivity(from = it.context)
+        }
+    }
+
+    @Subscribe
+    fun onRestaurantChoosed(event : OnRestaurantChoosedEvent)
+    {
+        println(event.restaurant.toString())
     }
 }

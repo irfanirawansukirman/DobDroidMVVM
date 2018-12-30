@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
 import ro.dobrescuandrei.demonewlibs.R
 import ro.dobrescuandrei.demonewlibs.model.FirstPageHeader
-import ro.dobrescuandrei.demonewlibs.model.SecondPageHeader
 
 
 class FirstPageHeaderView : HeaderView<FirstPageHeader>

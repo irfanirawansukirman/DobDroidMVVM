@@ -101,6 +101,31 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/main_margin"
+                android:paddingRight="@dimen/main_margin">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:text="@string/simple_choose_demo"
+                    android:id="@+id/simpleChooseDemo"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:text="@string/paged_choose_demo"
+                    android:id="@+id/pagedChooseDemo"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

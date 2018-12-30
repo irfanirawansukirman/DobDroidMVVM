@@ -19,10 +19,10 @@ class LoginActivity : BaseActivity<LoginViewModel>()
     {
         super.onCreate(savedInstanceState)
 
-        viewModel().run {
-            usernameEt.setOnTextChangedListener { username.value=it.trim() }
-            passwordEt.setOnTextChangedListener { password.value=it.trim() }
-            loginButton.setOnClickListener { onLoginClicked() }
+        loginButton.setOnClickListener {
+            viewModel().onLoginClicked(
+                username = usernameEt.text.toString().trim(),
+                password = passwordEt.text.toString().trim())
         }
     }
 

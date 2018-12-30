@@ -30,6 +30,12 @@
             android:configChanges="${configChanges}"/>
 
         <activity
+            android:name=".activity.RestaurantPagedListActivity"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="${configChanges}"/>
+
+        <activity
             android:name=".activity.RestaurantEditorActivity"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustResize"

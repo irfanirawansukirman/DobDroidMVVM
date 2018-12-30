@@ -1,20 +1,25 @@
 package ro.dobrescuandrei.mvvm
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import ro.dobrescuandrei.mvvm.utils.BackgroundEventBus
-import ro.dobrescuandrei.mvvm.utils.ForegroundEventBus
-import ro.dobrescuandrei.mvvm.utils.NO_VALUE_INT
+import com.miguelcatalan.materialsearchview.MaterialSearchView
+import org.greenrobot.eventbus.Subscribe
+import ro.dobrescuandrei.mvvm.utils.*
+import ro.dobrescuandrei.utils.onCreateOptionsMenuFromFragment
+import ro.dobrescuandrei.utils.onOptionsItemSelected
 
 abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
 {
+    var toolbar : Toolbar? = null
+    var searchView : MaterialSearchView? = null
+
     abstract fun viewModelClass() : Class<VIEW_MODEL>
     abstract fun layout() : Int
     open fun loadDataFromArguments() {}
@@ -32,18 +37,26 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
 
         loadDataFromArguments()
 
-        viewModel().run {
-            error.value=0
-            loading.value=false
+        toolbar=view.findViewById(R.id.toolbar)
+        searchView=view.findViewById(R.id.searchView)
 
-            error.observe(this@BaseFragment) { error ->
-                if (error!=NO_VALUE_INT)
-                    (context as BaseActivity<*>).showToast(error)
-            }
+        (context as AppCompatActivity).setSupportActionBar(toolbar)
 
-            loading.observe(this@BaseFragment) { loading ->
-                if (loading) (context as BaseActivity<*>).showLoadingDialog()
-                else (context as BaseActivity<*>).hideLoadingDialog()
+        if (viewModelClass()!=BaseViewModel::class.java)
+        {
+            viewModel().run {
+                error.value=0
+                loading.value=false
+
+                error.observe(this@BaseFragment) { error ->
+                    if (error!=NO_VALUE_INT)
+                        (context as BaseActivity<*>).showToast(error)
+                }
+
+                loading.observe(this@BaseFragment) { loading ->
+                    if (loading) (context as BaseActivity<*>).showLoadingDialog()
+                    else (context as BaseActivity<*>).hideLoadingDialog()
+                }
             }
         }
 
@@ -54,6 +67,17 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         catch (ex : Exception) {}
 
         return view
+    }
+
+    @Subscribe
+    open fun onKeyboardOpened(event : OnKeyboardOpenedEvent)
+    {
+    }
+
+    @Subscribe
+    open fun onKeyboardClosed(event : OnKeyboardClosedEvent)
+    {
+        searchView?.closeSearch()
     }
 
     override fun onResume()
@@ -87,6 +111,29 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
         catch (ex : Exception) {}
 
         super.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater)
+    {
+        try
+        {
+            toolbar?.onCreateOptionsMenuFromFragment()
+            searchView?.setMenuItem(menu.findItem(R.id.search))
+        }
+        catch (ex : Exception) {}
+
+        super.onCreateOptionsMenu(menu, menuInflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        toolbar?.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
+    }
+
+    open fun shouldFinishActivityOnBackPressed() : Boolean
+    {
+        return true
     }
 
     abstract class WithoutViewModel : BaseFragment<BaseViewModel>()

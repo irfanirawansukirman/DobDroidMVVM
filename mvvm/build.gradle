@@ -33,7 +33,7 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'
 
     //utils
-    api ('com.github.andob:DobDroidMiscUtils:v1.0.4') {
+    api ('com.github.andob:DobDroidMiscUtils:v1.0.5') {
         exclude group: 'com.android.support'
         exclude group: 'org.jetbrains.kotlin'
         exclude group: 'com.balysv.materialmenu'

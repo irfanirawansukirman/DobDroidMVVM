@@ -47,7 +47,7 @@ abstract class BaseListViewModel<FILTER>
                     hideLoading()
             },
             onSuccess = { items ->
-                doneLoadingPages=items.isEmpty()
+                doneLoadingPages=items.size<limit()
 
                 if (isFirstPage)
                 {

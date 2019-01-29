@@ -1,7 +1,6 @@
 package ro.dobrescuandrei.demonewlibs.viewmodel
 
 import android.text.TextUtils
-import androidx.lifecycle.MutableLiveData
 import ro.dobrescuandrei.demonewlibs.OnLoggedInEvent
 import ro.dobrescuandrei.demonewlibs.Preferences
 import ro.dobrescuandrei.demonewlibs.api.LoginRequest

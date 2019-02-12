@@ -44,7 +44,7 @@ class RestaurantEditorActivity : RestaurantEditorAdapter()
                     getString(R.string.fast_food)))
         }
 
-        ratingSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener
+        ratingSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener
         {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean)
             {
@@ -60,7 +60,7 @@ class RestaurantEditorActivity : RestaurantEditorAdapter()
             }
         })
 
-        nameEt.setOnTextChangedListener { name ->
+        nameEditText.setOnTextChangedListener { name ->
             viewModel..{ it.name=name }
         }
 
@@ -90,11 +90,11 @@ class RestaurantEditorActivity : RestaurantEditorAdapter()
     //chooser demo zone
     fun setupChooserDemo()
     {
-        simpleChooseDemo.setOnClickListener {
+        simpleChooseDemoButton.setOnClickListener {
             ActivityRouter.startChooseRestaurantActivity(from = it.context)
         }
 
-        pagedChooseDemo.setOnClickListener {
+        pagedChooseDemoButton.setOnClickListener {
             ActivityRouter.startChoosePagedRestaurantActivity(from = it.context)
         }
     }

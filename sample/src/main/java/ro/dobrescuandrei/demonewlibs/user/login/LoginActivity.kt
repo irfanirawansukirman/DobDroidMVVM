@@ -19,8 +19,8 @@ class LoginActivity : BaseActivity<LoginViewModel>()
 
         loginButton.setOnClickListener {
             viewModel.onLoginClicked(
-                username = usernameEt.text.toString().trim(),
-                password = passwordEt.text.toString().trim())
+                username = usernameEditText.text.toString().trim(),
+                password = passwordEditText.text.toString().trim())
         }
     }
 

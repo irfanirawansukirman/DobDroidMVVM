@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     tools:text="Normal"
                     android:textColor="@color/black"
-                    android:id="@+id/typeTv"/>
+                    android:id="@+id/typeLabel"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                     android:visibility="gone"
                     android:textStyle="bold"
                     android:textColor="@color/red"
-                    android:id="@+id/typeErrorTv"/>
+                    android:id="@+id/typeErrorLabel"/>
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:progress="2"
                     android:layout_marginTop="@dimen/half_margin"
                     android:textColor="@color/black"
-                    android:id="@+id/ratingSb"/>
+                    android:id="@+id/ratingSeekBar"/>
 
             </LinearLayout>
 
@@ -90,12 +90,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/main_margin"
-                android:id="@+id/nameTil">
+                android:id="@+id/nameTextInput">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nameEt"
+                    android:id="@+id/nameEditText"
                     android:hint="@string/name"
                     android:imeOptions="actionDone"
                     android:inputType="text" />
@@ -116,7 +116,7 @@
                     android:layout_weight="1"
                     android:textAllCaps="false"
                     android:text="@string/simple_choose_demo"
-                    android:id="@+id/simpleChooseDemo"/>
+                    android:id="@+id/simpleChooseDemoButton"/>
 
                 <Button
                     android:layout_width="0dp"
@@ -124,7 +124,7 @@
                     android:layout_weight="1"
                     android:textAllCaps="false"
                     android:text="@string/paged_choose_demo"
-                    android:id="@+id/pagedChooseDemo"/>
+                    android:id="@+id/pagedChooseDemoButton"/>
 
             </LinearLayout>
 

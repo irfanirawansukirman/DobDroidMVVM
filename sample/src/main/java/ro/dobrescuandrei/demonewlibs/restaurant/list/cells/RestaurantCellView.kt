@@ -18,9 +18,9 @@ class RestaurantCellView : ChooserCellView<Restaurant>
 
     override fun setData(restaurant : Restaurant)
     {
-        nameTv.text=restaurant.name
+        nameLabel.text=restaurant.name
 
-        nameTv.setOnCellClickListener(withModel = restaurant) {
+        nameLabel.setOnCellClickListener(withModel = restaurant) {
             if (it.context is RestaurantListActivity)
                 ActivityRouter.startRestaurantDetailsActivity(from = it.context, restaurant = restaurant)
             else ActivityRouter.startEditRestaurantActivity(from = it.context, restaurant = restaurant)

@@ -13,33 +13,19 @@
         app:title="@string/login"
         android:id="@+id/toolbar"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/usernameTil">
+        android:id="@+id/usernameEditText"
+        android:imeOptions="actionNext"
+        android:inputType="text"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/usernameEt"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordTil">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordEt"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:id="@+id/passwordEditText"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"/>
 
     <Button
         android:layout_width="match_parent"

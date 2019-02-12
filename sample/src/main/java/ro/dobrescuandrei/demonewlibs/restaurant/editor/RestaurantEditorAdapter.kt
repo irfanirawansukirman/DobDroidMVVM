@@ -19,30 +19,30 @@ abstract class RestaurantEditorAdapter : BaseEditorActivity<Restaurant, Restaura
 
         if (restaurant.type== NO_VALUE_INT)
         {
-            typeErrorTv.visibility=View.VISIBLE
-            typeTv.visibility= View.GONE
+            typeErrorLabel.visibility=View.VISIBLE
+            typeLabel.visibility= View.GONE
             viewModel.isValid=false
         }
         else
         {
-            typeErrorTv.visibility=View.GONE
-            typeTv.visibility=View.VISIBLE
-            typeTv.text=restaurant.getTypeAsString(resources)
+            typeErrorLabel.visibility=View.GONE
+            typeLabel.visibility=View.VISIBLE
+            typeLabel.text=restaurant.getTypeAsString(resources)
         }
 
-        ratingSb.progress=restaurant.rating-1
+        ratingSeekBar.progress=restaurant.rating-1
 
-        if (!nameEt.isFocused)
-            nameEt.setText(restaurant.name)
+        if (!nameEditText.isFocused)
+            nameEditText.setText(restaurant.name)
 
         if (TextUtils.isEmpty(restaurant.name))
         {
-            nameTil.error=getString(R.string.type_name)
+            nameTextInput.error=getString(R.string.type_name)
             viewModel.isValid=false
         }
         else
         {
-            nameTil.error=null
+            nameTextInput.error=null
         }
     }
 }

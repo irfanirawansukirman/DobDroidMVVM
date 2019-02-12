@@ -1,1 +1,2 @@
-include ':frontend', ':mvvm', ':business_logic'
+include ':sample'
+include ':mvvm'

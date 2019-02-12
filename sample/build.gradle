@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "ro.dobrescuandrei.demonewlibs"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [
+                configChanges: "mcc|mnc|locale|touchscreen|keyboard|keyboardHidden" +
+                        "|navigation|screenLayout|fontScale|uiMode|orientation" +
+                        "|density|screenSize"
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //architecture
+//    implementation 'com.github.andob:DobDroidMVVM:1.0.1'
+    implementation project(":mvvm")
+
+    //preferences
+    implementation 'com.chibatching.kotpref:kotpref:2.6.0'
+
+    //retrofit
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.9.1"
+
+    //event bus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //material dialogs
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+}

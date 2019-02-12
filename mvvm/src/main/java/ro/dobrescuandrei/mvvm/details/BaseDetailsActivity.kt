@@ -10,7 +10,7 @@ abstract class BaseDetailsActivity<MODEL : Identifiable<*>, VIEW_MODEL : BaseDet
     override fun loadDataFromIntent()
     {
         intent?.extras?.getSerializable(ARG_MODEL)?.let { model ->
-            viewModel().model=model as MODEL
+            viewModel.model=model as MODEL
         }
     }
 

@@ -24,18 +24,15 @@ import ro.dobrescuandrei.utils.Keyboard
 import ro.dobrescuandrei.utils.onCreateOptionsMenu
 import ro.dobrescuandrei.utils.onOptionsItemSelected
 
-abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
+abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : JBaseActivity<VIEW_MODEL>()
 {
     var toolbar : Toolbar? = null
     var searchView : MaterialSearchView? = null
     private var unregistrar : Unregistrar? = null
     private var loadingDialog : AlertDialog? = null
 
-    abstract fun viewModelClass() : Class<VIEW_MODEL>
     abstract fun layout() : Int
     open fun loadDataFromIntent() {}
-
-    fun viewModel() = ViewModelProviders.of(this)[viewModelClass()]
 
     fun <T> LiveData<T>.observe(owner : LifecycleOwner, observer : (T) -> (Unit))
     {
@@ -57,7 +54,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : AppCompatActivity()
 
         if (viewModelClass()!=BaseViewModel::class.java)
         {
-            viewModel().run {
+            viewModel.run {
                 error.value=0
                 loading.value=false
 

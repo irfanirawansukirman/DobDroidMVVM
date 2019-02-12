@@ -31,7 +31,7 @@ abstract class BaseEditorViewModel<MODEL : Identifiable<ID>, ID> : BaseViewModel
         this.model.value=model
     }
 
-    public inline fun model(consumer : MODEL.(MODEL) -> (Unit))
+    inline operator fun rangeTo(consumer : MODEL.(MODEL) -> (Unit))
     {
         model.value?.let { model ->
             consumer(model, model)

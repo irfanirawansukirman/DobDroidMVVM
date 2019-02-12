@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="empty" translatable="false"/>
-    <string name="please_type_username">Please type username</string>
-    <string name="please_type_password">Please type password</string>
-    <string name="invalid_username_or_password">Invalid username or password</string>
-    <string name="normal">Normal</string>
-    <string name="fast_food">Fast food</string>
-</resources>

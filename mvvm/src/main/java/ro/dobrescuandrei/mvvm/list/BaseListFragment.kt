@@ -43,8 +43,8 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             {
                 if (!TextUtils.isEmpty(query))
                 {
-                    viewModel().search=query!!
-                    viewModel().loadData()
+                    viewModel.search=query!!
+                    viewModel.loadData()
 
                     searchView?.closeSearch()
                 }
@@ -77,13 +77,13 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
         if (shouldLoadMoreOnScroll())
         {
             recyclerView.loadMoreDataAction={
-                viewModel().loadMoreData()
+                viewModel.loadMoreData()
             }
         }
 
         emptyView.text = provideEmptyViewText()
 
-        viewModel().run {
+        viewModel.run {
             firstPageItems.value=null
             nextPageItems.value=null
             isEmpty.value=false
@@ -117,7 +117,7 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
             }
         }
 
-        viewModel().loadData()
+        viewModel.loadData()
 
         return view
     }
@@ -135,10 +135,10 @@ abstract class BaseListFragment<VIEW_MODEL : BaseListViewModel<*>, ADAPTER : Bas
     {
         try
         {
-            if (viewModel().searchMode())
+            if (viewModel.searchMode())
             {
-                viewModel().search=null
-                viewModel().loadData()
+                viewModel.search=null
+                viewModel.loadData()
                 return false
             }
 

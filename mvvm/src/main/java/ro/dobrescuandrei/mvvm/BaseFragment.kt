@@ -15,12 +15,11 @@ import ro.dobrescuandrei.mvvm.utils.*
 import ro.dobrescuandrei.utils.onCreateOptionsMenuFromFragment
 import ro.dobrescuandrei.utils.onOptionsItemSelected
 
-abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
+abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : JBaseFragment<VIEW_MODEL>()
 {
     var toolbar : Toolbar? = null
     var searchView : MaterialSearchView? = null
 
-    abstract fun viewModelClass() : Class<VIEW_MODEL>
     abstract fun layout() : Int
     open fun loadDataFromArguments() {}
 
@@ -44,7 +43,7 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : Fragment()
 
         if (viewModelClass()!=BaseViewModel::class.java)
         {
-            viewModel().run {
+            viewModel.run {
                 error.value=0
                 loading.value=false
 

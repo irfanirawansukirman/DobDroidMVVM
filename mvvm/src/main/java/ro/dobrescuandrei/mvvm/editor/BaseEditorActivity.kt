@@ -15,7 +15,7 @@ abstract class BaseEditorActivity<MODEL : Identifiable<*>, VIEW_MODEL : BaseEdit
     override fun loadDataFromIntent()
     {
         (intent?.extras?.getSerializable(ARG_MODEL) as? MODEL)?.let { modelToEdit ->
-            viewModel().model.value=modelToEdit
+            viewModel.model.value=modelToEdit
         }
     }
 
@@ -24,14 +24,14 @@ abstract class BaseEditorActivity<MODEL : Identifiable<*>, VIEW_MODEL : BaseEdit
         super.onCreate(savedInstanceState)
 
         saveButton=findViewById(R.id.saveButton)
-        saveButton.setOnClickListener { viewModel().onSaveButtonClicked() }
+        saveButton.setOnClickListener { viewModel.onSaveButtonClicked() }
 
-        viewModel().model.observe(this) { model ->
+        viewModel.model.observe(this) { model ->
             if (model!=null)
             {
-                viewModel().shouldNotifyModelLiveDataOnPropertyChange=false
+                viewModel.shouldNotifyModelLiveDataOnPropertyChange=false
                 show(model)
-                viewModel().shouldNotifyModelLiveDataOnPropertyChange=true
+                viewModel.shouldNotifyModelLiveDataOnPropertyChange=true
             }
         }
     }

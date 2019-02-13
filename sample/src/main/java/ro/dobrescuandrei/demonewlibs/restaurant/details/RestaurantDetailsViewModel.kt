@@ -1,9 +1,9 @@
 package ro.dobrescuandrei.demonewlibs.restaurant.details
 
 import ro.dobrescuandrei.demonewlibs.api.GetRestaurantsRequest
-import ro.dobrescuandrei.demonewlibs.model.utils.FirstPageHeader
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
 import ro.dobrescuandrei.demonewlibs.model.RestaurantFilter
+import ro.dobrescuandrei.demonewlibs.model.utils.FirstPageHeader
 import ro.dobrescuandrei.demonewlibs.model.utils.SecondPageHeader
 import ro.dobrescuandrei.mvvm.details.BaseDetailsViewModel
 

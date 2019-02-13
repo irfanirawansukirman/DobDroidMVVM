@@ -3,8 +3,8 @@ package ro.dobrescuandrei.demonewlibs.user.login
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import org.greenrobot.eventbus.Subscribe
-import ro.dobrescuandrei.demonewlibs.model.utils.OnLoggedInEvent
 import ro.dobrescuandrei.demonewlibs.R
+import ro.dobrescuandrei.demonewlibs.model.utils.OnLoggedInEvent
 import ro.dobrescuandrei.demonewlibs.router.ActivityRouter
 import ro.dobrescuandrei.mvvm.BaseActivity
 

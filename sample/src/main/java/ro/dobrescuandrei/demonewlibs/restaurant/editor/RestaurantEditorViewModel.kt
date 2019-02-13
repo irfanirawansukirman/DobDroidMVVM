@@ -2,8 +2,8 @@ package ro.dobrescuandrei.demonewlibs.restaurant.editor
 
 import ro.dobrescuandrei.demonewlibs.api.AddRestaurantRequest
 import ro.dobrescuandrei.demonewlibs.api.EditRestaurantRequest
-import ro.dobrescuandrei.demonewlibs.model.utils.ID
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
+import ro.dobrescuandrei.demonewlibs.model.utils.ID
 import ro.dobrescuandrei.mvvm.editor.BaseEditorViewModel
 
 class RestaurantEditorViewModel : BaseEditorViewModel<Restaurant, ID>(Restaurant())

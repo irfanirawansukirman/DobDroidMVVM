@@ -14,9 +14,8 @@ abstract class BaseEditorActivity<MODEL : Identifiable<*>, VIEW_MODEL : BaseEdit
 
     override fun loadDataFromIntent()
     {
-        (intent?.extras?.getSerializable(ARG_MODEL) as? MODEL)?.let { modelToEdit ->
-            viewModel.model.value=modelToEdit
-        }
+        val model=intent?.extras?.getSerializable(ARG_MODEL) as? MODEL
+        if (model!=null) viewModel.model.value=model
     }
 
     override fun onCreate(savedInstanceState: Bundle?)

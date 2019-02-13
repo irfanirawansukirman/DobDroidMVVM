@@ -1,9 +1,9 @@
 package ro.dobrescuandrei.demonewlibs.restaurant.list
 
 import org.greenrobot.eventbus.Subscribe
-import ro.dobrescuandrei.demonewlibs.model.utils.OnRestaurantAddedEvent
 import ro.dobrescuandrei.demonewlibs.R
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
+import ro.dobrescuandrei.demonewlibs.model.utils.OnRestaurantAddedEvent
 import ro.dobrescuandrei.mvvm.BaseFragment
 import ro.dobrescuandrei.mvvm.chooser.BaseFragmentsContainerActivity
 
@@ -11,8 +11,7 @@ class RestaurantPagedListActivity : BaseFragmentsContainerActivity<Restaurant>()
 {
     override fun provideFragments(): Array<BaseFragment<*>> = arrayOf(
         RestaurantListFragment(),
-        RestaurantListFragment()
-    )
+        RestaurantListFragment())
 
     override fun provideBottomNavigationMenu(): Int = R.menu.bottom_menu_restaurants_paged
 

@@ -4,12 +4,12 @@ import android.os.Bundle
 import ro.andreidobrescu.declarativeadapterkt.DeclarativeAdapter
 import ro.andreidobrescu.declarativeadapterkt.view.HeaderView
 import ro.dobrescuandrei.demonewlibs.R
-import ro.dobrescuandrei.demonewlibs.model.utils.FirstPageHeader
 import ro.dobrescuandrei.demonewlibs.model.Restaurant
+import ro.dobrescuandrei.demonewlibs.model.utils.FirstPageHeader
 import ro.dobrescuandrei.demonewlibs.model.utils.SecondPageHeader
-import ro.dobrescuandrei.demonewlibs.restaurant.list.cells.RestaurantCellView
 import ro.dobrescuandrei.demonewlibs.restaurant.details.headers.FirstPageHeaderView
 import ro.dobrescuandrei.demonewlibs.restaurant.details.headers.SecondPageHeaderView
+import ro.dobrescuandrei.demonewlibs.restaurant.list.cells.RestaurantCellView
 import ro.dobrescuandrei.mvvm.details.BaseDetailsActivity
 import ro.dobrescuandrei.utils.setupBackIcon
 
@@ -22,10 +22,8 @@ class RestaurantDetailsActivity : BaseDetailsActivity<Restaurant, RestaurantDeta
     {
         super.onCreate(savedInstanceState)
 
-        toolbar?.let { toolbar ->
-            toolbar.setupBackIcon()
-            toolbar.setTitle(R.string.restaurant)
-        }
+        toolbar.setupBackIcon()
+        toolbar.setTitle(R.string.restaurant)
     }
 
     override fun provideAdapter() : DeclarativeAdapter

@@ -1,21 +1,17 @@
 package ro.dobrescuandrei.demonewlibs.restaurant.editor
 
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.View
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_restaurant_editor.*
 import org.greenrobot.eventbus.Subscribe
+import ro.dobrescuandrei.demonewlibs.R
+import ro.dobrescuandrei.demonewlibs.model.Restaurant
 import ro.dobrescuandrei.demonewlibs.model.utils.OnRestaurantAddedEvent
 import ro.dobrescuandrei.demonewlibs.model.utils.OnRestaurantChoosedEvent
-import ro.dobrescuandrei.demonewlibs.R
 import ro.dobrescuandrei.demonewlibs.model.utils.RefreshRestaurantListCommand
-import ro.dobrescuandrei.demonewlibs.model.Restaurant
 import ro.dobrescuandrei.demonewlibs.router.ActivityRouter
 import ro.dobrescuandrei.demonewlibs.router.ShowDialog
-import ro.dobrescuandrei.mvvm.editor.BaseEditorActivity
 import ro.dobrescuandrei.mvvm.utils.BackgroundEventBus
-import ro.dobrescuandrei.mvvm.utils.NO_VALUE_INT
 import ro.dobrescuandrei.mvvm.utils.OnEditorModel
 import ro.dobrescuandrei.utils.setOnTextChangedListener
 import ro.dobrescuandrei.utils.setupBackIcon
@@ -26,12 +22,10 @@ class RestaurantEditorActivity : RestaurantEditorAdapter()
     {
         super.onCreate(savedInstanceState)
 
-        toolbar?.let { toolbar ->
-            toolbar.setupBackIcon()
-            toolbar.setTitle(if (viewModel.addMode())
-                    R.string.add_restaurant
-                else R.string.edit_restaurant)
-        }
+        toolbar.setupBackIcon()
+        toolbar.setTitle(if (viewModel.addMode())
+                R.string.add_restaurant
+            else R.string.edit_restaurant)
 
         typeButton.setOnClickListener {
             ShowDialog.withList(context = this,

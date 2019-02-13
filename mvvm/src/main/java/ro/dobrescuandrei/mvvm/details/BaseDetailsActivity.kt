@@ -9,9 +9,8 @@ abstract class BaseDetailsActivity<MODEL : Identifiable<*>, VIEW_MODEL : BaseDet
 {
     override fun loadDataFromIntent()
     {
-        intent?.extras?.getSerializable(ARG_MODEL)?.let { model ->
-            viewModel.model=model as MODEL
-        }
+        val model=intent?.extras?.getSerializable(ARG_MODEL) as? MODEL
+        if (model!=null) viewModel.model=model
     }
 
     override fun shouldLoadMoreOnScroll() : Boolean = false

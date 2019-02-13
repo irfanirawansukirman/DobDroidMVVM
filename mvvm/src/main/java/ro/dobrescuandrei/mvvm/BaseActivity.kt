@@ -9,12 +9,9 @@ import android.view.MenuItem
 import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.franmontiel.localechanger.LocaleChanger
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
@@ -26,7 +23,6 @@ import ro.dobrescuandrei.utils.onOptionsItemSelected
 
 abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : JBaseActivity<VIEW_MODEL>()
 {
-    var toolbar : Toolbar? = null
     var searchView : MaterialSearchView? = null
     private var unregistrar : Unregistrar? = null
     private var loadingDialog : AlertDialog? = null
@@ -171,6 +167,9 @@ abstract class BaseActivity<VIEW_MODEL : BaseViewModel> : JBaseActivity<VIEW_MOD
 
         hideLoadingDialog()
         loadingDialog=null
+
+        toolbar=null
+        searchView=null
 
         super.onDestroy()
     }

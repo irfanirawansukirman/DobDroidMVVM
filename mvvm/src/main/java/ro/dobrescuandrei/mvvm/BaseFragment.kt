@@ -3,8 +3,6 @@ package ro.dobrescuandrei.mvvm
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -17,7 +15,6 @@ import ro.dobrescuandrei.utils.onOptionsItemSelected
 
 abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : JBaseFragment<VIEW_MODEL>()
 {
-    var toolbar : Toolbar? = null
     var searchView : MaterialSearchView? = null
 
     abstract fun layout() : Int
@@ -108,6 +105,9 @@ abstract class BaseFragment<VIEW_MODEL : BaseViewModel> : JBaseFragment<VIEW_MOD
             BackgroundEventBus.unregister(this)
         }
         catch (ex : Exception) {}
+
+        toolbar=null
+        searchView=null
 
         super.onDestroy()
     }

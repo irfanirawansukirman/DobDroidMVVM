@@ -6,6 +6,5 @@ import ro.dobrescuandrei.mvvm.list.BaseListViewModel
 
 class RestaurantListViewModel : BaseListViewModel<RestaurantFilter>(RestaurantFilter())
 {
-    override fun getItems() : List<Any> =
-        GetRestaurantsRequest(search, filter, limit(), offset).execute()
+    override fun getItems() : List<Any> = GetRestaurantsRequest(search, filter, limit(), offset).execute()
 }

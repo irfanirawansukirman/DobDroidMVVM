@@ -2,9 +2,9 @@ package ro.dobrescuandrei.demonewlibs.user.login
 
 import android.text.TextUtils
 import ro.dobrescuandrei.demonewlibs.R
+import ro.dobrescuandrei.demonewlibs.api.LoginRequest
 import ro.dobrescuandrei.demonewlibs.model.utils.OnLoggedInEvent
 import ro.dobrescuandrei.demonewlibs.model.utils.Preferences
-import ro.dobrescuandrei.demonewlibs.api.LoginRequest
 import ro.dobrescuandrei.mvvm.BaseViewModel
 import ro.dobrescuandrei.mvvm.utils.ForegroundEventBus
 import ro.dobrescuandrei.utils.Run

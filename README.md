@@ -1,8 +1,8 @@
 # DobDroidMVVM
 
-### MVVM sample app, based on Android Architecutre Components MVVM
+### MVVM sample app (based on Android Architecutre Components MVVM)
 
-### And a library containing some abstraction layers for some generic app features
+### Plus a library containing abstraction layers for some generic app features
 
 1. Loading, error views
 2. List screens
